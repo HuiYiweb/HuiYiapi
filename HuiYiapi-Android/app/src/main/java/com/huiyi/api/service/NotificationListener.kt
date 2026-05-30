@@ -5,7 +5,10 @@ import android.util.Log
 import com.huiyi.api.core.network.WebSocketManager
 
 class NotificationListener : NotificationListenerService() {
-    companion object { var isRunning = false }
+    companion object {
+        var isRunning = false
+        val MONITORED_PACKAGES = setOf("com.tencent.mm", "com.tencent.mobileqq", "org.telegram.messenger", "com.alibaba.android.rimet")
+    }
 
     override fun onCreate() { super.onCreate(); isRunning = true; Log.i("HuiYi_Ntf", "通知监听已启动") }
 
@@ -29,8 +32,4 @@ class NotificationListener : NotificationListenerService() {
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {}
-
-    companion object {
-        val MONITORED_PACKAGES = setOf("com.tencent.mm", "com.tencent.mobileqq", "org.telegram.messenger", "com.alibaba.android.rimet")
-    }
 }
