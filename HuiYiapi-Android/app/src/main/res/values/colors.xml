@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="deep_space">#FF0D0D1A</color>
+    <color name="card_bg">#FF1A1A2E</color>
+    <color name="accent">#FF7C83FF</color>
+    <color name="highlight">#FFA78BFA</color>
+    <color name="success">#FF34D399</color>
+    <color name="text_primary">#FFCBD5E1</color>
+    <color name="text_secondary">#FF94A3B8</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

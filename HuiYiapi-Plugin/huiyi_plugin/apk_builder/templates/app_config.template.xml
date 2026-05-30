@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_device_id">{{DEVICE_ID}}</string>
+    <string name="default_bridge_url">{{BRIDGE_WS_URL}}</string>
+</resources>

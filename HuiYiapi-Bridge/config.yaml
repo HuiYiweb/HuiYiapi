@@ -1,0 +1,11 @@
+# HuiYiapi Bridge Server 配置文件
+ws_host: "0.0.0.0"
+ws_port: 8765
+onebot_url: "ws://127.0.0.1:6700/"
+onebot_access_token: ""
+mcp_enabled: true
+tool_timeout: 30
+heartbeat_interval: 30
+log_level: "INFO"
+adb_enabled: false
+adb_path: "adb"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HuiYi</string>
+    <string name="splash_title">🌙 HuiYi</string>
+    <string name="welcome_title">嗨，我是 HuiYi</string>
+    <string name="welcome_desc">你的 AI 语音伙伴\n一个能听懂你每一次对话、在关键时刻轻声提醒你的随身智能伴侣。</string>
+    <string name="privacy_note">🔒 你的数据只存在于本地，我们不会上传任何对话内容</string>
+    <string name="btn_start">开始旅程</string>
+    <string name="btn_continue">继续</string>
+    <string name="btn_skip">跳过（功能受限）</string>
+    <string name="btn_go_settings">去设置</string>
+    <string name="btn_test_connection">测试连接</string>
+    <string name="permission_notification_title">不错过每一句话</string>
+    <string name="permission_notification_desc">当微信/QQ 来消息时，HuiYi 能帮你理解对话上下文</string>
+    <string name="permission_accessibility_title">让我帮你聆听</string>
+    <string name="connection_title">连接 AI 大脑</string>
+    <string name="log_enabled">启用日志</string>
+    <string name="log_enabled_desc">开启后记录关键操作到本地文件</string>
+</resources>

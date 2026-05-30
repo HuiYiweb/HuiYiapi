@@ -1,0 +1,12 @@
+name: huiyiapi
+version: 1.0.0
+description: HuiYiapi 手机消息桥接与语音处理插件 - 支持多设备管理、OneBot v11 连接、一键构建定制 APK、语音/视频通话实时处理
+author: HuiYi Team
+license: MIT
+astrbot_version: ">=3.0.0"
+tags:
+  - onebot
+  - mobile
+  - bridge
+  - voice
+  - mcp

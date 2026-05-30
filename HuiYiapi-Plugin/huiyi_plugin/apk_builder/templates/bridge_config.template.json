@@ -1,0 +1,8 @@
+{
+    "device_id": "{{DEVICE_ID}}",
+    "device_name": "{{DEVICE_NAME}}",
+    "bridge_ws_url": "{{BRIDGE_WS_URL}}",
+    "monitored_packages": {{MONITORED_PACKAGES}},
+    "voice_config": {{VOICE_CONFIG}},
+    "coordinate_template": "{{COORDINATE_TEMPLATE}}"
+}

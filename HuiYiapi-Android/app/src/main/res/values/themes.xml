@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.HuiYi" parent="android:Theme.Material.NoActionBar">
+        <item name="android:colorBackground">@color/deep_space</item>
+        <item name="android:statusBarColor">@color/deep_space</item>
+        <item name="android:navigationBarColor">@color/card_bg</item>
+        <item name="android:windowBackground">@color/deep_space</item>
+    </style>
+    <style name="Theme.HuiYi.Splash" parent="Theme.HuiYi">
+        <item name="android:windowBackground">@color/deep_space</item>
+    </style>
+</resources>

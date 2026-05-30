@@ -1,0 +1,70 @@
+name: Build Custom APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      device_id:
+        description: '设备唯一标识'
+        required: true
+        type: string
+      device_name:
+        description: '设备名称'
+        required: true
+        type: string
+        default: 'HuiYi Phone'
+      bridge_ws_url:
+        description: '桥接器 WebSocket 地址'
+        required: true
+        type: string
+        default: 'ws://your-server:8765'
+      monitored_packages:
+        description: '监听的包名(JSON数组)'
+        required: false
+        type: string
+        default: '["com.tencent.mm","com.tencent.mobileqq"]'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: HuiYiapi-Android
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Generate config.json
+        run: |
+          mkdir -p app/src/main/assets
+          cat > app/src/main/assets/config.json << CONEOF
+          {
+            "device_id": "${{ github.event.inputs.device_id }}",
+            "device_name": "${{ github.event.inputs.device_name }}",
+            "bridge_ws_url": "${{ github.event.inputs.bridge_ws_url }}",
+            "monitored_packages": ${{ github.event.inputs.monitored_packages }},
+            "build_time": "$(date -Iseconds)"
+          }
+          CONEOF
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: HuiYiapi-${{ github.event.inputs.device_id }}
+          path: |
+            HuiYiapi-Android/app/build/outputs/apk/debug/*.apk
+            HuiYiapi-Android/app/build/outputs/apk/release/*.apk
