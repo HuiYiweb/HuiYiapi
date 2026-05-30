@@ -5,11 +5,9 @@ import kotlinx.coroutines.flow.*
 import okhttp3.*
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
-import javax.inject.*
 
-@Singleton
-class WebSocketManager @Inject constructor() {
-    companion object { private const val TAG = "HuiYi_WS" }
+object WebSocketManager {
+    private const val TAG = "HuiYi_WS"
     private val client = OkHttpClient.Builder().pingInterval(15, TimeUnit.SECONDS).readTimeout(0, TimeUnit.MILLISECONDS).build()
     private var webSocket: WebSocket? = null
     private var wsUrl = "ws://10.0.2.2:8765"
@@ -39,7 +37,7 @@ class WebSocketManager @Inject constructor() {
                 startHeartbeat()
             }
             override fun onMessage(ws: WebSocket, text: String) {
-                try { scope.launch { _incomingMessages.emit(JSONObject(text)) } } catch (e: Exception) {}
+                try { scope.launch { _incomingMessages.emit(JSONObject(text)) } } catch (_: Exception) {}
             }
             override fun onClosed(ws: WebSocket, code: Int, reason: String) {
                 _connectionState.value = ConnectionState.DISCONNECTED; heartbeatJob?.cancel(); scheduleReconnect()
@@ -51,35 +49,23 @@ class WebSocketManager @Inject constructor() {
     }
 
     fun disconnect() { heartbeatJob?.cancel(); webSocket?.close(1000, "用户断开") }
-    fun send(data: JSONObject): Boolean = try { webSocket?.send(data.toString()); true } catch (e: Exception) { false }
+    fun send(data: JSONObject): Boolean = try { webSocket?.send(data.toString()); true } catch (_: Exception) { false }
 
     fun sendMessage(app: String, sender: String, content: String, isGroup: Boolean = false, group: String = "") {
         send(JSONObject().apply { put("type","incoming"); put("app",app); put("sender",sender); put("content",content); put("is_group",isGroup); put("group",group) })
     }
-
     fun sendVoiceText(text: String, callId: String) {
         send(JSONObject().apply { put("type","voice_text"); put("text",text); put("call_id",callId) })
     }
-
     fun sendToolResult(id: String, success: Boolean, data: Any? = null) {
         send(JSONObject().apply { put("type","tool_result"); put("id",id); put("success",success); if(data!=null) put("result",data) })
     }
 
-    fun sendCallEvent(event: String, callId: String, caller: String = "", app: String = "", callType: String = "voice") {
-        send(JSONObject().apply { put("type","call_event"); put("call_event",event); put("call_id",callId); put("caller",caller); put("app",app); put("call_type",callType) })
-    }
-
     private fun startHeartbeat() {
         heartbeatJob?.cancel()
-        heartbeatJob = scope.launch {
-            while (isActive) { delay(15000); send(JSONObject().apply { put("type","heartbeat") }) }
-        }
+        heartbeatJob = scope.launch { while (isActive) { delay(15000); send(JSONObject().apply { put("type","heartbeat") }) } }
     }
-
     private fun scheduleReconnect() {
-        scope.launch {
-            val d = minOf(1000L * (1L shl retryCount), 30000L); retryCount++
-            delay(d); connect()
-        }
+        scope.launch { val d = minOf(1000L * (1L shl retryCount), 30000L); retryCount++; delay(d); connect() }
     }
 }

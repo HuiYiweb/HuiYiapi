@@ -3,13 +3,12 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
 class HuiYiApplication : Application() {
     companion object {
         const val CHANNEL_WS = "huiyi_ws_channel"
         const val CHANNEL_CALL = "huiyi_call_channel"
+        const val NOTIFICATION_ID_WS = 1001
     }
     override fun onCreate() {
         super.onCreate()
