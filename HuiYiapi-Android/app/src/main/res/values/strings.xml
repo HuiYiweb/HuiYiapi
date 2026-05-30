@@ -13,6 +13,7 @@
     <string name="permission_notification_title">不错过每一句话</string>
     <string name="permission_notification_desc">当微信/QQ 来消息时，HuiYi 能帮你理解对话上下文</string>
     <string name="permission_accessibility_title">让我帮你聆听</string>
+    <string name="permission_accessibility_desc">启用无障碍服务后，HuiYi 可以帮你自动发送消息、点击屏幕和操控设备。</string>
     <string name="connection_title">连接 AI 大脑</string>
     <string name="log_enabled">启用日志</string>
     <string name="log_enabled_desc">开启后记录关键操作到本地文件</string>
